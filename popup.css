@@ -1,0 +1,53 @@
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+#toolbar {
+    background-color: #1c1e22; /* Dark background */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    width: 480px;
+    height: 60px;
+}
+
+.toolbar-btn {
+    background-color: #1c1e22; /* Button background */
+    border: 0px solid #676a6d;
+    border-radius: 4px;
+    color: #fff; /* Button text color */
+    cursor: pointer;
+    font-size: 12px;
+    width: 120px;
+    height: 60px;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.toolbar-btn:hover {
+    background-color: #3a3c40; /* Button hover state */
+    border-color: #fff;
+}
+
+.toolbar-btn:active,
+.toolbar-btn.active {
+    background-color: #555; /* Button active state */
+}
+
+.toolbar-btn.end-call {
+    background-color: #d32f2f; /* End call button color */
+    border-color: #a52727;
+    height: 30px;
+    width: 90px;
+}
+
+.toolbar-btn.end-call:hover {
+    background-color: #f44336; /* End call button hover state */
+}
+
+/* Add additional styling as needed for icons and active states */
+.toolbar-btn .fa-solid {
+    font-size:large; /* Larger icons */
+    margin: 5%;
+}

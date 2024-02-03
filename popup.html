@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Extension Toolbar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div id="toolbar">
+        <button id="talkBtn" data-status="inactive" class="toolbar-btn"><i class="fa-solid fa-microphone"></i><br> Start Talking</button>
+        <button id="shareScreenBtn" class="toolbar-btn"><i class="fa-solid fa-desktop"></i><br> Share Screen</button>
+        <button id="recordBtn" class="toolbar-btn"><i class="fa-solid fa-circle-dot"></i><br> Record</button>
+        <button id="endCallBtn" class="toolbar-btn end-call">End</button>
+
+    </div>
+    <script src="popup.js"></script>
+    <script src="speech.js"></script>
+</body>
+</html>
