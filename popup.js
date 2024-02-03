@@ -1,42 +1,3 @@
-document.getElementById('talkBtn').addEventListener('click', () => {
-    var button = event.target;
-    var status = button.getAttribute('data-status');
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.lang = 'en-US';
-    recognition.continuous = true; 
-    var transcript = "";
-
-    recognition.onresult = function(event) {
-      // Handle the speech result here
-      transcript = event.results[event.resultIndex][0].transcript;
-      console.log(transcript);
-      queryGPT(transcript)
-            .then((response) => {
-                console.log(response);
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-  };
-
-    if (status === "inactive") {
-      button.setAttribute('data-status', 'active');
-      button.textContent = 'Speaking'; // Change button text or appearance
-      if (SpeechRecognition) {
-        recognition.start();
-        recognition.onstart = function() {
-          console.log('Voice recognition started. Speak into the microphone.');
-        };
-      } else {
-        console.error('Speech Recognition API not supported.');
-      }
-    } else {
-        button.setAttribute('data-status', 'inactive');
-        button.textContent = 'Start Speaking'; 
-    }
-});
-
 document.getElementById('recordBtn').addEventListener('click', () => {
   queryGPT("Hi GPT, how are you doing?")
     .then((response) => {
@@ -62,3 +23,45 @@ document.getElementById('endCallBtn').addEventListener('click', () => {
   window.close();
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+  const toggleBtn = document.getElementById('talkBtn');
+  let isListening = false; // Tracks the microphone state
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+
+  recognition.continuous = true; // Keep the microphone open
+
+  recognition.onstart = function() {
+      console.log('Microphone is on.');
+  };
+
+  recognition.onend = function() {
+      console.log('Microphone is off.');
+  };
+
+  recognition.onerror = function(event) {
+      console.error('Speech recognition error', event.error);
+  };
+
+  toggleBtn.addEventListener('click', () => {
+      if (!isListening) {
+          recognition.start();
+          toggleBtn.textContent = 'Stop Microphone';
+      } else {
+          recognition.stop();
+          toggleBtn.textContent = 'Start Microphone';
+      }
+      isListening = !isListening; // Toggle the state
+  });
+  recognition.onresult = function(event) {
+    // Handle the speech result here
+    transcript = event.results[event.resultIndex][0].transcript;
+    console.log(transcript);
+    queryGPT(transcript)
+          .then((response) => {
+              console.log(response);
+          })
+          .catch((error) => {
+              console.error(error);
+          });
+};
+});

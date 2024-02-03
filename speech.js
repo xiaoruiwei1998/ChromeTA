@@ -1,4 +1,4 @@
-const apiKey = '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';
+const apiKey = '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';
 
 // Function to call OpenAI's text-to-speech API
 function openAITextToSpeech(text) {
@@ -54,7 +54,7 @@ async function queryGPT (prompt){
             model: "gpt-3.5-turbo", // Or any other model you wish to use
             messages: [{
                 role: "system",
-                content: "You are a helpful assistant."
+                content: "You are a helpful assistant. If user asks whether they can share the screen, please answer: sure, go ahead!"
             },{
                 role: "user",
                 content: prompt
