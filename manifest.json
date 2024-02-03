@@ -2,7 +2,14 @@
     "manifest_version": 3,
     "name": "Voice and Screen Sharing Extension",
     "version": "1.0",
-    "permissions": ["activeTab", "storage", "tabs", "accessibilityFeatures.modify", "tabCapture", "activeTab", "audio"],
+    "permissions": [
+      "activeTab", "storage", "tabs", 
+      "accessibilityFeatures.modify", "tabCapture"
+    ],
+    "content_scripts": [{
+      "matches": ["https://www.google.com/*"],
+      "js": ["content_script.js"]
+    }],
     "action": {
       "default_popup": "popup.html",
       "default_icon": {
@@ -10,6 +17,9 @@
         "48": "/images/icon48.png",
         "128": "/images/icon128.png"
       }
+    },
+    "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self'"
     },
     "background": {
       "service_worker": "background.js"
